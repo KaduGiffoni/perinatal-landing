@@ -3,15 +3,23 @@ import SceneSection from "./components/sections/SceneSection";
 import AmbientBackground from "./components/background/AmbientBackground";
 import SmoothScroll from "./components/SmoothScroll";
 import FadeText from "./components/ui/FadeText";
-import WindowLight from "./components/background/WindowLight"; // <-- Importamos a luz
+import WindowLight from "./components/background/WindowLight";
 
 export default function App() {
   return (
     <>
       <SmoothScroll />
+
+      {/* CAMADA 1: O fundo bege/rosado (z-[-20]) */}
       <AmbientBackground />
+
+      {/* CAMADA 2: A luz da janela brilhando sobre o fundo (z-[-10]) */}
+      <WindowLight />
+
+      {/* CAMADA 3: A poeira de cristal flutuando na luz (z-0) */}
       <ParticleScene />
 
+      {/* CAMADA 4: O texto (z-10) */}
       <main className="relative z-10 text-[#4A3B38]">
         <SceneSection theme="intro">
           <section className="h-screen flex flex-col items-center justify-center px-6 md:px-12">
@@ -32,10 +40,6 @@ export default function App() {
 
         <SceneSection theme="pregnant">
           <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-32 relative">
-            {/* INJETAMOS A LUZ GEOMÉTRICA AQUI */}
-            <WindowLight />
-
-            {/* Mudamos de ml-auto (direita) para max-w-2xl sem margem (esquerda) */}
             <div className="max-w-2xl text-left">
               <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-6 block">
                 Gestação
@@ -46,8 +50,6 @@ export default function App() {
             </div>
           </section>
         </SceneSection>
-
-        {/* ... Restante do App.tsx continua igual ... */}
 
         <SceneSection theme="transition">
           <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24">
