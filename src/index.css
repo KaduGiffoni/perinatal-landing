@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importando as fontes elegantes do Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600&family=Inter:wght@200;300;400&display=swap");
+
+body {
+  margin: 0;
+  /* Uma cor base para não dar quebra visual */
+  background-color: #f5ebe9;
+  color: #4a3b38;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+h1,
+h2 {
+  font-family: "Playfair Display", serif;
+}
+
+/* === ANIMAÇÕES ORGÂNICAS À PROVA DE FALHAS === */
+/* Sem isso, o fundo nunca vai se mover! */
+@keyframes slow-move {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, 40px) scale(1.05);
+  }
+}
+
+@keyframes slow-move-reverse {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -40px) scale(0.95);
+  }
+}
+
+.animacao-lenta {
+  animation: slow-move 20s ease-in-out infinite;
+}
+
+.animacao-lenta-reversa {
+  animation: slow-move-reverse 25s ease-in-out infinite;
+}
