@@ -5,26 +5,32 @@ import CameraRig from "./CameraRig";
 
 export default function ParticleScene() {
   return (
-    // CORREÇÃO: Certifique-se de que a div é full-screen com 'fixed inset-0'.
-    // Adicionamos 'z-index: 50' e 'pointer-events-none' para ela não bloquear o site.
-    // O 'bg-red-500' é apenas para o teste. Depois que funcionar, remova-o.
-    <div className="fixed inset-0 z-50 pointer-events-none bg-red-500">
+    // Forçando o layout diretamente no React para ignorar bugs de CSS/Tailwind
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: 0,
+        pointerEvents: "none",
+      }}
+    >
       <Canvas
         camera={{
           position: [0, 0, 8],
           fov: 75,
         }}
       >
-        <fog attach="fog" args={["#f7efea", 8, 20]} />
-        <CameraRig />
+        {/* Atualizei a cor da "névoa" do cenário para bater com a sua nova cor premium do fundo */}
+        <fog attach="fog" args={["#F5EBE9", 8, 20]} />
 
-        {/* CORREÇÃO SECUNDÁRIA: Certifique-se de que a tag <points> no Particles.tsx
-           não tem escala pequena como 'scale={0.02}'. Ela deve ser '<points ref={pointsRef}>'. */}
+        <CameraRig />
         <Particles />
 
         <EffectComposer>
-          {/* CORREÇÃO OPCIONAL: Reduza a intensidade do Bloom para um design mais elegante.
-             Tente 'intensity={0.5}'. O valor atual '1' é muito forte. */}
+          {/* Intensidade do Bloom reduzida (0.5) para manter a elegância cristalina */}
           <Bloom intensity={0.5} luminanceThreshold={0.2} mipmapBlur />
         </EffectComposer>
       </Canvas>

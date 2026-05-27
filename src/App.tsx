@@ -3,6 +3,7 @@ import SceneSection from "./components/sections/SceneSection";
 import AmbientBackground from "./components/background/AmbientBackground";
 import SmoothScroll from "./components/SmoothScroll";
 import FadeText from "./components/ui/FadeText";
+import WindowLight from "./components/background/WindowLight"; // <-- Importamos a luz
 
 export default function App() {
   return (
@@ -11,7 +12,6 @@ export default function App() {
       <AmbientBackground />
       <ParticleScene />
 
-      {/* Cor do texto aplicada globalmente: Um marrom grafite elegante */}
       <main className="relative z-10 text-[#4A3B38]">
         <SceneSection theme="intro">
           <section className="h-screen flex flex-col items-center justify-center px-6 md:px-12">
@@ -31,8 +31,12 @@ export default function App() {
         </SceneSection>
 
         <SceneSection theme="pregnant">
-          <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24">
-            <div className="max-w-2xl ml-auto text-center md:text-left">
+          <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-32 relative">
+            {/* INJETAMOS A LUZ GEOMÉTRICA AQUI */}
+            <WindowLight />
+
+            {/* Mudamos de ml-auto (direita) para max-w-2xl sem margem (esquerda) */}
+            <div className="max-w-2xl text-left">
               <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-6 block">
                 Gestação
               </span>
@@ -43,9 +47,11 @@ export default function App() {
           </section>
         </SceneSection>
 
+        {/* ... Restante do App.tsx continua igual ... */}
+
         <SceneSection theme="transition">
           <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24">
-            <div className="max-w-2xl text-center md:text-left">
+            <div className="max-w-2xl text-left">
               <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-6 block">
                 Maternidade
               </span>
@@ -64,28 +70,6 @@ export default function App() {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.15] text-center max-w-4xl mb-10">
               Um espaço de acolhimento para viver cada fase com mais leveza.
             </h2>
-            <p className="text-lg md:text-xl opacity-70 font-light leading-relaxed text-center max-w-2xl">
-              A psicologia perinatal oferece suporte emocional contínuo durante
-              a gestação, parto, puerpério e construção da maternidade.
-            </p>
-          </section>
-        </SceneSection>
-
-        <SceneSection theme="calm">
-          <section className="min-h-screen flex flex-col items-center justify-center px-6 md:px-12">
-            <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-6 block">
-              Cuidado
-            </span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.15] text-center max-w-4xl mb-10">
-              Você não precisa atravessar tudo sozinha.
-            </h2>
-            <p className="text-lg md:text-xl opacity-70 font-light leading-relaxed text-center max-w-2xl mb-16">
-              Um espaço seguro para acolher emoções, mudanças e as profundas
-              transformações da maternidade.
-            </p>
-            <button className="px-10 py-5 rounded-full bg-[#4A3B38] text-[#F5EBE9] text-sm tracking-[0.2em] uppercase hover:bg-[#352926] hover:scale-105 transition-all duration-500 shadow-lg">
-              Agendar acompanhamento
-            </button>
           </section>
         </SceneSection>
       </main>

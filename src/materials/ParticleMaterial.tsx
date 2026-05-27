@@ -4,11 +4,7 @@ export function createParticleMaterial() {
   return new THREE.ShaderMaterial({
     transparent: true,
     depthWrite: false,
-
-    // --- FIX DA VISIBILIDADE ---
-    // Obrigatório usar NormalBlending para conseguir ver partículas claras (rosa)
-    // sobre um fundo claro (bege). Isso garante contraste.
-    blending: THREE.NormalBlending,
+    blending: THREE.NormalBlending, 
 
     vertexShader: `
       varying float vDepth;
@@ -16,15 +12,10 @@ export function createParticleMaterial() {
         vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
         vDepth = position.z;
 
-        // --- DEFINIÇÃO DE ELEGÂNCIA (NÍTIDO E PEQUENO) ---
-        // Tamanho base pequeno (15.0) para ter pontos nítidos e distintos, como fragmentos.
-        // Adicionamos variação sutil com o seno para ter textura visual tátil.
-        float size = 5.0 + sin(position.x * 2.0) * 1.5;
+        // Variação orgânica de tamanho das poeiras
+        float size = 8.0 + sin(position.x * 10.0) * 6.0;
 
-        // Perspectiva: Garante nítidez e tamanho correto baseado na distância da câmera,
-        // o que resolve o piscar técnico (aliasing).
         gl_PointSize = size * (1.0 / -mvPosition.z);
-
         gl_Position = projectionMatrix * mvPosition;
       }
     `,
@@ -32,25 +23,19 @@ export function createParticleMaterial() {
     fragmentShader: `
       varying float vDepth;
       void main() {
-        // --- NITEZ EXTREMA (ANTI-NÉVOA) ---
-        // distanceToCenter vai de 0.0 (centro) a 0.5 (borda).
         float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
         
-        // Criamos um fragmento perfeitamente nítido (disco).
-        // Tudo que está a menos de 0.49 de distância do centro fica 100% visível,
-        // e o smoothstep suave entre 0.49 e 0.5 apenas suaviza a borda externa
-        // para não parecer pixelado, mantendo a "elegância".
-        float strength = 1.0 - smoothstep(0.40, 0.5, distanceToCenter);
+        // Círculos suaves e legíveis
+        float strength = 1.0 - smoothstep(0.3, 0.5, distanceToCenter);
         
-        // --- SUA COR ROSA ORIGINAL ---
-        // Restauramos a cor rosa claro exata que você queria: vec3(0.91, 0.74, 0.78)
-        vec3 color = vec3(0.91, 0.74, 0.78);
+        // --- COR DE LUZ DO SOL (Golden/Dust) ---
+        vec3 color = vec3(1.0, 0.9, 0.75); 
 
-        // Se o alpha calculado pela nítidez ou profundidade for nulo, descartamos o pixel.
-        if(strength < 0.1 || (1.0 - abs(vDepth) * 0.15) < 0.1) discard;
+        // Garante que o alpha seja forte o suficiente para dar contraste
+        float alpha = strength * (1.2 - abs(vDepth) * 0.1);
+        if(alpha < 0.1) discard;
 
-        // Definimos o alpha final baseado na nitidez e profundidade
-        gl_FragColor = vec4(color, strength * (1.0 - abs(vDepth) * 0.15));
+        gl_FragColor = vec4(color, alpha);
       }
     `,
   });
