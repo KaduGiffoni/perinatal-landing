@@ -1,71 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Importando as fontes elegantes do Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600&family=Inter:wght@200;300;400&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  margin: 0;
-  /* Uma cor base para não dar quebra visual */
-  background-color: #f5ebe9;
-  color: #4a3b38;
-  font-family: "Inter", sans-serif;
+  background: radial-gradient(
+    circle at top left,
+    #e2d4ca 0%,
+    #d4c3b8 40%,
+    #c9b8ad 100%
+  );
+
+  color: #3a2e2a;
+
   overflow-x: hidden;
+
+  font-family: "Inter", sans-serif;
+
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
-h2 {
-  font-family: "Playfair Display", serif;
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cormorant Garamond", serif;
 }
 
-/* === ANIMAÇÕES ORGÂNICAS À PROVA DE FALHAS === */
-/* Sem isso, o fundo nunca vai se mover! */
-@keyframes slow-move {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(30px, 40px) scale(1.05);
-  }
+::selection {
+  background: #3a2e2a;
+  color: white;
 }
 
-@keyframes slow-move-reverse {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-30px, -40px) scale(0.95);
-  }
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.animacao-lenta {
-  animation: slow-move 20s ease-in-out infinite;
+::-webkit-scrollbar-track {
+  background: #e8ddd5;
 }
 
-.animacao-lenta-reversa {
-  animation: slow-move-reverse 25s ease-in-out infinite;
+::-webkit-scrollbar-thumb {
+  background: rgba(58, 46, 42, 0.25);
+  border-radius: 999px;
 }
 
-@keyframes dustFloat {
+/* TEXTURA */
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  background-image: url("/textures/paper.jpg");
+  background-size: cover;
+
+  opacity: 0.08;
+
+  mix-blend-mode: multiply;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+/* ANIMAÇÕES */
+
+@keyframes floatSlow {
   0% {
-    transform: translateY(0px) translateX(0px);
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 0.3;
+    transform: translateY(0px);
   }
 
   50% {
-    transform: translateY(-25px) translateX(10px);
-    opacity: 0.2;
+    transform: translateY(-18px);
   }
 
   100% {
-    transform: translateY(-60px) translateX(-10px);
-    opacity: 0;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes breathe {
+  0% {
+    transform: translateY(0px);
+    letter-spacing: -0.04em;
+  }
+
+  50% {
+    transform: translateY(-4px);
+    letter-spacing: -0.02em;
+  }
+
+  100% {
+    transform: translateY(0px);
+    letter-spacing: -0.04em;
   }
 }

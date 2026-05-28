@@ -3,78 +3,156 @@ import SceneSection from "./components/sections/SceneSection";
 import AmbientBackground from "./components/background/AmbientBackground";
 import SmoothScroll from "./components/SmoothScroll";
 import FadeText from "./components/ui/FadeText";
-import WindowLight from "./components/background/WindowLight";
+
+import "./App.css";
+import PuerperiumLight from "./components/background/PuerperiumLight";
 
 export default function App() {
   return (
-    <>
+    <div className="app-shell">
       <SmoothScroll />
 
-      {/* CAMADA 1: O fundo bege/rosado (z-[-20]) */}
+      {/* FUNDO */}
       <AmbientBackground />
 
-      {/* CAMADA 2: A luz da janela brilhando sobre o fundo (z-[-10]) */}
-      <WindowLight />
+      {/* SOMBRA CINEMATOGRÁFICA */}
+      <div className="cinematic-shadow" />
 
-      {/* CAMADA 3: A poeira de cristal flutuando na luz (z-0) */}
-      <ParticleScene />
+      {/* TEXTURA */}
+      <div className="noise-overlay" />
 
-      {/* CAMADA 4: O texto (z-10) */}
-      <main className="relative z-10 text-[#4A3B38]">
+      {/* LUZ */}
+      <div className="window-light-wrapper">
+        <div className="window-light" />
+      </div>
+
+      {/* PARTÍCULAS */}
+      <div className="particle-layer">
+        <ParticleScene />
+      </div>
+
+      {/* HEADER */}
+      <header className="main-header">
+        <span>Psicologia Perinatal</span>
+
+        <span>Amanda Fonseca</span>
+      </header>
+
+      <main className="main-content">
+        {/* HERO */}
         <SceneSection theme="intro">
-          <section className="h-screen flex flex-col items-center justify-center px-6 md:px-12">
-            <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-8 block">
-              Psicologia Perinatal
-            </span>
-            <FadeText>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-[1.1] text-center max-w-5xl mb-10">
-                Existe uma nova versão de você nascendo.
-              </h1>
-            </FadeText>
-            <p className="text-lg md:text-xl opacity-70 font-light leading-relaxed text-center max-w-2xl">
-              O cuidado emocional na gestação e maternidade transforma quem
-              cuida.
+          <section className="hero-section">
+            <div className="floating-phrase">
+              você não precisa passar por isso sozinha
+            </div>
+
+            <div className="hero-content">
+              <div className="hero-badge">acolhimento emocional materno</div>
+
+              <FadeText>
+                <h1 className="hero-title">
+                  Existe uma nova versão
+                  <br />
+                  <span>de você nascendo.</span>
+                </h1>
+              </FadeText>
+
+              <p className="hero-description">
+                A maternidade muda o corpo, os pensamentos, os medos e a forma
+                como você enxerga a si mesma. Você não precisa atravessar tudo
+                isso sozinha.
+              </p>
+
+              <div className="hero-actions">
+                <a href="#contato" className="primary-button">
+                  Agendar acolhimento
+                </a>
+
+                <button className="secondary-button">Conhecer abordagem</button>
+              </div>
+            </div>
+          </section>
+        </SceneSection>
+
+        <div className="editorial-line" />
+
+        {/* GESTAÇÃO */}
+        <SceneSection theme="pregnant">
+          <section className="content-section">
+            <div className="content-grid">
+              <div>
+                <span className="section-label">Gestação</span>
+
+                <h2 className="section-title">
+                  Gestar também é atravessar mudanças invisíveis.
+                </h2>
+
+                <p className="section-description">
+                  Medos, ansiedade, culpa, cobranças, inseguranças e mudanças
+                  emocionais profundas. Nem toda transformação aparece no corpo.
+                </p>
+              </div>
+
+              <div className="glass-visual">
+                <div className="glass-orb orb-1" />
+                <div className="glass-orb orb-2" />
+              </div>
+            </div>
+          </section>
+        </SceneSection>
+
+        <div className="editorial-line" />
+
+        {/* PUERPÉRIO */}
+        <SceneSection theme="transition">
+          <section className="center-section">
+            <PuerperiumLight />
+
+            <span className="section-label">Puerpério</span>
+
+            <h2 className="center-title">
+              O vínculo começa muito antes do nascimento.
+            </h2>
+
+            <p className="center-description">
+              Acolhimento emocional para prevenção da depressão pós-parto,
+              fortalecimento da identidade feminina e reconstrução emocional.
             </p>
           </section>
         </SceneSection>
 
-        <SceneSection theme="pregnant">
-          <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-32 relative">
-            <div className="max-w-2xl text-left">
-              <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-6 block">
-                Gestação
-              </span>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.15] mb-8">
-                Gestar também é atravessar mudanças invisíveis.
-              </h2>
-            </div>
-          </section>
-        </SceneSection>
+        <div className="editorial-line" />
 
-        <SceneSection theme="transition">
-          <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24">
-            <div className="max-w-2xl text-left">
-              <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-6 block">
-                Maternidade
-              </span>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.15] mb-8">
-                O vínculo começa muito antes do nascimento.
-              </h2>
-            </div>
-          </section>
-        </SceneSection>
-
+        {/* SOBRE */}
         <SceneSection theme="mother">
-          <section className="min-h-screen flex flex-col items-center justify-center px-6 md:px-12">
-            <span className="uppercase tracking-[0.4em] text-[11px] font-medium opacity-50 mb-6 block">
-              Sobre
-            </span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.15] text-center max-w-4xl mb-10">
-              Um espaço de acolhimento para viver cada fase com mais leveza.
-            </h2>
+          <section className="about-section">
+            <div className="about-card">
+              <div className="about-content">
+                <span className="section-label">A profissional</span>
+
+                <h2 className="section-title">
+                  Muito prazer,
+                  <br />
+                  sou Amanda.
+                </h2>
+
+                <p className="section-description">
+                  Meu propósito é oferecer um espaço seguro para mulheres que
+                  estão vivendo as transformações da maternidade.
+                </p>
+
+                <a href="#contato" className="primary-button">
+                  Agendar acolhimento
+                </a>
+              </div>
+
+              <div className="about-visual">
+                <div className="about-light" />
+              </div>
+            </div>
           </section>
         </SceneSection>
       </main>
-    </>
+    </div>
   );
 }

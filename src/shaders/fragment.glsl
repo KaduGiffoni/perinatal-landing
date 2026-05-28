@@ -2,20 +2,24 @@ varying float vDistance;
 varying float vDepth;
 
 
+varying float vAlpha;
+
 void main() {
-  float distanceToCenter =
-    distance(gl_PointCoord, vec2(0.5));
 
-  float strength =
-    0.05 / distanceToCenter - 0.1;
+    float dist = distance(gl_PointCoord, vec2(0.5));
 
-  vec3 color =
-    vec3(0.91, 0.74, 0.78);
+    float strength = 0.05 / dist - 0.1;
 
-float alpha =
-  strength *
-  (1.0 - abs(vDepth) * 0.15);
+    strength = smoothstep(0.0, 1.0, strength);
 
-gl_FragColor =
-  vec4(color, alpha);
+    vec3 warmColor = vec3(
+        1.0,
+        0.94,
+        0.88
+    );
+
+    gl_FragColor = vec4(
+        warmColor,
+        strength * vAlpha * 2.2
+    );
 }
