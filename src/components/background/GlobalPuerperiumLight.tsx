@@ -1,34 +1,32 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export default function PuerperiumLight() {
+export default function GlobalPuerperiumLight() {
   const { scrollYProgress } = useScroll();
 
-  const y = useTransform(scrollYProgress, [0.15, 0.45], [0, 180]);
+  const opacity = useTransform(scrollYProgress, [0.3, 0.42, 0.6], [0, 1, 0]);
 
-  const opacity = useTransform(scrollYProgress, [0.12, 0.2, 0.45], [0, 1, 0]);
+  const y = useTransform(scrollYProgress, [0.3, 0.6], [0, 120]);
 
   return (
     <motion.div
       className="global-puerperium-light"
       style={{
         opacity,
+        y,
       }}
     >
-      <motion.div
-        className="window-projection-realistic"
-        style={{
-          y,
-        }}
-      >
+      <div className="window-projection-realistic">
+        {/* ARCO */}
         <div className="window-arch-realistic" />
 
+        {/* DIVISÓRIAS */}
         <div className="window-divider vertical left" />
         <div className="window-divider vertical center" />
         <div className="window-divider vertical right" />
 
         <div className="window-divider horizontal top" />
         <div className="window-divider horizontal middle" />
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

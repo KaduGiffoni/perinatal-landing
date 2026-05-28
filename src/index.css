@@ -112,3 +112,7 @@ body::before {
     letter-spacing: -0.04em;
   }
 }
+
+.puerperium-section {
+  position: relative;
+}

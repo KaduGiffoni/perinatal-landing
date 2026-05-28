@@ -5,7 +5,8 @@ import SmoothScroll from "./components/SmoothScroll";
 import FadeText from "./components/ui/FadeText";
 
 import "./App.css";
-import PuerperiumLight from "./components/background/PuerperiumLight";
+import GlobalPuerperiumLight from "./components/background/GlobalPuerperiumLight";
+
 
 export default function App() {
   return (
@@ -14,6 +15,8 @@ export default function App() {
 
       {/* FUNDO */}
       <AmbientBackground />
+
+      <GlobalPuerperiumLight />
 
       {/* SOMBRA CINEMATOGRÁFICA */}
       <div className="cinematic-shadow" />
@@ -105,8 +108,8 @@ export default function App() {
 
         {/* PUERPÉRIO */}
         <SceneSection theme="transition">
-          <section className="center-section">
-            <PuerperiumLight />
+          <section className="center-section puerperium-section">
+            
 
             <span className="section-label">Puerpério</span>
 
