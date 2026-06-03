@@ -1,0 +1,139 @@
+/* =========================================
+   WRAPPER GLOBAL (O Fundo do Palco)
+========================================= */
+.organic-atmosphere-wrapper {
+  position: absolute; /* Mude para 'fixed' se quiser no site todo */
+  inset: 0;
+  z-index: -1; /* Fica atrás de tudo */
+  overflow: hidden;
+  pointer-events: none; /* Impede que clique nas formas por acidente */
+  background-color: #f7f3f0; /* Cor de fundo base (bege muito claro) */
+}
+
+/* =========================================
+   FLUIDEZ ORGÂNICA (Líquido Amniótico)
+========================================= */
+.amniotic-liquid-container {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+}
+
+.amniotic-blob {
+  position: absolute;
+  /* Um desfoque extremo para as formas se misturarem como aquarela */
+  filter: blur(60px);
+  animation: amnioticMorph 20s ease-in-out infinite alternate;
+}
+
+.blob-primary {
+  width: 55vw;
+  height: 55vw;
+  top: -10%;
+  left: -10%;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 205, 190, 0.6) 0%,
+    rgba(215, 185, 170, 0.2) 100%
+  );
+}
+
+.blob-secondary {
+  width: 65vw;
+  height: 65vw;
+  bottom: -15%;
+  right: -10%;
+  /* Atraso na animação para se moverem em ritmos diferentes */
+  animation-delay: -7s;
+  animation-duration: 25s;
+  background: linear-gradient(
+    135deg,
+    rgba(240, 220, 200, 0.5) 0%,
+    rgba(225, 195, 180, 0.1) 100%
+  );
+}
+
+/* A Animação que altera a forma de redonda para "orgânica" */
+@keyframes amnioticMorph {
+  0% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    border-radius: 60% 40% 30% 70% / 50% 60% 40% 60%;
+    transform: rotate(10deg) scale(1.05);
+  }
+  100% {
+    border-radius: 30% 70% 50% 50% / 60% 30% 70% 40%;
+    transform: rotate(-5deg) scale(0.95);
+  }
+}
+
+/* =========================================
+   CORTINA DE LINHO (Tecido Translúcido)
+========================================= */
+.sheer-fabric-container {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+}
+
+.fabric-panel {
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  width: 35vw;
+  /* Um filtro para suavizar as bordas da textura */
+  filter: blur(4px);
+}
+
+/* Painel Esquerdo */
+.fabric-left {
+  left: -5%;
+  /* Textura de ruído + Gradiente sumindo para a direita */
+  background-image:
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMSIvPjxjaXJjbGUgY3g9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSJyZ2JhKDAsMCwwLDAuMDIpIi8+PC9zdmc+"),
+    linear-gradient(
+      to right,
+      rgba(255, 250, 245, 0.9) 0%,
+      rgba(255, 250, 245, 0.2) 60%,
+      transparent 100%
+    );
+
+  animation: fabricBreezeLeft 14s ease-in-out infinite alternate;
+}
+
+/* Painel Direito */
+.fabric-right {
+  right: -5%;
+  /* Textura de ruído + Gradiente sumindo para a esquerda */
+  background-image:
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMSIvPjxjaXJjbGUgY3g9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSJyZ2JhKDAsMCwwLDAuMDIpIi8+PC9zdmc+"),
+    linear-gradient(
+      to left,
+      rgba(255, 250, 245, 0.9) 0%,
+      rgba(255, 250, 245, 0.2) 60%,
+      transparent 100%
+    );
+
+  animation: fabricBreezeRight 18s ease-in-out infinite alternate-reverse;
+}
+
+/* A Brisa na Cortina: Movimento horizontal quase imperceptível */
+@keyframes fabricBreezeLeft {
+  0% {
+    transform: translateX(0) skewX(0deg);
+  }
+  100% {
+    transform: translateX(3%) skewX(-1deg);
+  }
+}
+
+@keyframes fabricBreezeRight {
+  0% {
+    transform: translateX(0) skewX(0deg);
+  }
+  100% {
+    transform: translateX(-3%) skewX(1deg);
+  }
+}
